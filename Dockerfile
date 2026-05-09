@@ -68,7 +68,8 @@ COPY docs/images ./docs/images
 COPY docs/FAQ*.md ./docs/
 
 # Create output, data and temp directories
-RUN mkdir -p /app/output /app/data /app/temp
+# Also create logs directory for easier debugging
+RUN mkdir -p /app/output /app/data /app/temp /app/logs
 
 # Expose ports
 # 8000: API service
