@@ -76,5 +76,10 @@ RUN mkdir -p /app/output /app/data /app/temp /app/logs
 # 8501: Web UI service
 EXPOSE 8000 8501
 
+# Healthcheck to verify the API service is responding
+# Checks every 30s, allows 60s startup time before first check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
 # Default command (can be overridden in docker-compose)
 CMD ["uv", "run", "python", "api/app.py"]
